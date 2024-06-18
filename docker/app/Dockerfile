@@ -5,7 +5,7 @@ FROM amazoncorretto:21-alpine-jdk
 WORKDIR /app
 
 # copy a jvm app.
-COPY build/libs/*.jar app.jar
+# COPY build/libs/*.jar app.jar
 
 # startup a jvm app.
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# ENTRYPOINT ["java", "-jar", "app.jar"]
