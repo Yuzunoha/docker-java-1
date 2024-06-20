@@ -4,9 +4,8 @@ services:
   app:
     container_name: app
     build: 
-      context: ./docker/app
-    volumes:
-      - ./src/demo:/app
+      context: .
+      dockerfile: ./docker/app/Dockerfile
     ports:
       - 8080:8080
     tty: true
