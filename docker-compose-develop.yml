@@ -4,8 +4,8 @@ services:
   app:
     container_name: app
     build: 
-      context: ./docker/app
-      dockerfile: DockerfileDevelop
+      context: .
+      dockerfile: ./docker/app/DockerfileDevelop
     volumes:
       - ./src/demo:/app
     ports:
