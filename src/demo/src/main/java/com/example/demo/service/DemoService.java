@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 public class DemoService {
 
     public String test() {
-        final var s = "DemoServiceサービスです";
+        final var s = "DemoServiceサービスです!";
         return s;
     }
 

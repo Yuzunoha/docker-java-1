@@ -1,4 +1,2 @@
 FROM amazoncorretto:21-alpine-jdk
-ARG LOCAL_UID
-ENV LOCAL_UID ${LOCAL_UID}
 WORKDIR /app
