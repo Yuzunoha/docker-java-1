@@ -1,7 +1,7 @@
 develop-up:
 	docker-compose -f docker-compose-develop.yml up -d
-develop-down:
-	docker-compose -f docker-compose-develop.yml down
+develop-down-all:
+	docker-compose -f docker-compose-develop.yml down --rmi all --volumes
 deploy-up:
 	docker-compose up -d
 deploy-down-all:
