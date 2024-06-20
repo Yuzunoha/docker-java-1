@@ -1,9 +1,7 @@
 FROM amazoncorretto:21-alpine-jdk AS builder
 COPY ./src/demo /app
-WORKDIR /app
-RUN ./gradlew build && \
-    cp ./build/libs/*SNAPSHOT.jar /app/app.jar
+RUN cd /app && ./gradlew build
 
 FROM amazoncorretto:21-alpine-jdk
-COPY --from=builder /app/app.jar /app.jar
+COPY --from=builder /app/build/libs/*SNAPSHOT.jar /app.jar
 ENTRYPOINT ["java", "-jar", "/app.jar"]
