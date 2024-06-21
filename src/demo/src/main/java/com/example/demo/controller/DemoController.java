@@ -19,4 +19,8 @@ public class DemoController {
         return s;
     }
 
+    @RequestMapping("calc")
+    public String calc() {
+        return demoService.calc();
+    }
 }
