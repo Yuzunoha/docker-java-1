@@ -11,16 +11,21 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class DemoController {
 
-    private final DemoService demoService;
+  private final DemoService demoService;
 
-    @RequestMapping("/")
-    public String test() {
-        final var s = demoService.test();
-        return s;
-    }
+  @RequestMapping("/")
+  public String test() {
+    final var s = demoService.test();
+    return s;
+  }
 
-    @RequestMapping("calc")
-    public String calc() {
-        return demoService.calc();
-    }
+  @RequestMapping("calc")
+  public String calc() {
+    return demoService.calc();
+  }
+
+  @RequestMapping("testDynamoDb")
+  public String testDynamoDb() {
+    return demoService.testDynamoDb();
+  }
 }

@@ -11,3 +11,8 @@ services:
     ports:
       - 8080:8080
     tty: true
+
+networks:
+  default:
+    name: dynamodb-local
+    external: true
