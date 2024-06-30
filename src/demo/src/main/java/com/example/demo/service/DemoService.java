@@ -1,31 +1,25 @@
 package com.example.demo.service;
 
-import com.amazonaws.auth.AWSCredentialsProvider;
-import com.amazonaws.auth.AWSCredentialsProviderChain;
-import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.auth.ClasspathPropertiesFileCredentialsProvider;
-import com.amazonaws.auth.EC2ContainerCredentialsProviderWrapper;
-import com.amazonaws.auth.EnvironmentVariableCredentialsProvider;
-import com.amazonaws.auth.profile.ProfileCredentialsProvider;
-import com.amazonaws.client.builder.AwsClientBuilder.EndpointConfiguration;
-import com.amazonaws.regions.Regions;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
+import lombok.RequiredArgsConstructor;
+
 import java.util.function.BiPredicate;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class DemoService {
 
-  private AmazonDynamoDB amazonDynamoDB = null;
+  private final DynamoDbService dynamoDbService;
 
   public String test() {
     return "hello";
   }
 
   public String testDynamoDb() {
-    return this.getAmazonDynamoDB().listTables().getTableNames().toString();
+    // 書き込み
+    this.dynamoDbService.randomPut();
+    // 結果の返却
+    return this.dynamoDbService.getAmazonDynamoDB().listTables().toString();
   }
 
   public String calc() {
@@ -45,25 +39,4 @@ public class DemoService {
     return "解なし";
   }
 
-  public AmazonDynamoDB getAmazonDynamoDB() {
-    if (null != this.amazonDynamoDB) {
-      return this.amazonDynamoDB;
-    }
-
-    final AWSCredentialsProvider providers = new AWSCredentialsProviderChain(
-        new EnvironmentVariableCredentialsProvider(),
-        new ClasspathPropertiesFileCredentialsProvider(),
-        new ProfileCredentialsProvider(),
-        new EC2ContainerCredentialsProviderWrapper());
-    final String endpoint = "http://dynamodb-local:8000";
-    final String region = "dummy";
-    final AmazonDynamoDBClientBuilder builder = AmazonDynamoDBClientBuilder.standard();
-    builder.setCredentials(providers);
-
-    builder.setEndpointConfiguration(
-        new EndpointConfiguration(endpoint, region));
-
-    this.amazonDynamoDB = builder.build();
-    return this.amazonDynamoDB;
-  }
 }
