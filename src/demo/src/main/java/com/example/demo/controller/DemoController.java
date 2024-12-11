@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
 import com.example.demo.service.DemoService;
+import com.example.demo.service.Test1Service;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class DemoController {
 
   private final DemoService demoService;
+  private final Test1Service test1Service;
 
   @RequestMapping("/")
   public String test() {
@@ -25,5 +28,11 @@ public class DemoController {
   @RequestMapping("testDynamoDb")
   public String testDynamoDb() {
     return demoService.testDynamoDb();
+  }
+
+  @RequestMapping("test1")
+  public String test1() {
+    var result = test1Service.test1Method1();
+    return result;
   }
 }
